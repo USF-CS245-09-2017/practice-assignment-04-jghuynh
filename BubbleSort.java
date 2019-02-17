@@ -1,9 +1,10 @@
 /**
- * Numerically sorts a given array using the method Bubble Sort
- * @Author Justine Huynh
+ * Numerically sorts a given array using the method Bubble Sort:
+ * Repeatedly switch every values.
+ * @author Justine Huynh
  * 02/15/2019
  */
-public class BubbleSort {
+public class BubbleSort implements SortingAlgorithm {
 
     /**
      * Finds the index that contains the smallest value in a given array
@@ -11,17 +12,17 @@ public class BubbleSort {
      * @param start the index to start looking
      * @return the index that has the smallest value
      */
-    public int findSmallest(float[] myArray, int start)
+    public int findSmallest(int[] myArray, int start)
     {
-        int smallest = start; // assume that the starting index holds the smallest value
+        int smallestInd = start; // assume that the starting index holds the smallest value
         for (int index = start + 1; index < myArray.length; index ++)
         {
-            if (myArray[index] < myArray[smallest]) // if current index holds an even smaller value
+            if (myArray[index] < myArray[smallestInd]) // if current index holds an even smaller value
             {
-                smallest = index; // updates where the smallest index is
+                smallestInd = index; // updates where the smallest index is
             }
         }
-        return smallest; // returns the index where the smallest value is.
+        return smallestInd; // returns the index where the smallest value is.
     }
 
 
@@ -33,9 +34,9 @@ public class BubbleSort {
      * @param subsequent the subsequent index
      */
 
-    public void swap(float[] myArray, int previous, int subsequent)
+    private void swap(int[] myArray, int previous, int subsequent)
     {
-        float temp = myArray[previous]; // Ex: a, b
+        int temp = myArray[previous]; // Ex: a, b
         myArray[previous] = myArray[subsequent]; // switch: b, b
         myArray[subsequent] = temp; // b, a
     }
@@ -44,16 +45,25 @@ public class BubbleSort {
      * Numerically sorts through a given array using the method Bubble Sort
      * @param myArray the array to be sorted
      */
-    public void sort (float[] myArray)
+
+    public void sort(int[] myArray)
     {
-        for (int index = 0; index < myArray.length; index ++)
+        for (int i = 0; i < myArray.length - 1; i ++)
         {
-            // if subsequent value is less than previous value, swap!
-            if (myArray[index + 1] < myArray[index])
+            for (int index = 0; index < myArray.length - i - 1; index ++)
             {
-                    swap(myArray, index, findSmallest(myArray, index));
+                if (myArray[index] > myArray[index + 1])
+                {
+                    swap(myArray, index, index + 1);
+                }
             }
         }
+
+    }
+
+    public static void main(String[] args)
+    {
+        //int[] myArray = {12, 3, 0, 4, 7};
     }
 }
 
